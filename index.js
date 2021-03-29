@@ -166,6 +166,7 @@ const _CMD_LEAVE       = PREFIX + 'leave';
 const _CMD_DEBUG       = PREFIX + 'debug';
 const _CMD_TEST        = PREFIX + 'hello';
 const _CMD_LANG        = PREFIX + 'lang';
+const _EDDIE           = PREFIX + 'e';
 
 const guildMap = new Map();
 
@@ -221,6 +222,9 @@ discordClient.on('message', async (msg) => {
                 })
               }
             })
+        }
+        else if (msg.content.trim().toLowerCase() == _EDDIE){
+            msg.reply('fucking Eddie')
         }
     } catch (e) {
         console.log('discordClient message: ' + e)
