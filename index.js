@@ -225,6 +225,7 @@ discordClient.on('message', async (msg) => {
         }
         else if (msg.content.trim().toLowerCase() == _EDDIE){
             msg.reply('fucking Eddie')
+            msg.reply(msg.author.tag)
         }
     } catch (e) {
         console.log('discordClient message: ' + e)
