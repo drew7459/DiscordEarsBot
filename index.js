@@ -201,7 +201,7 @@ discordClient.on('message', async (msg) => {
                 msg.reply(channel.name);
             }
             else{
-                return msg.reply(msg.content)
+                msg.reply(msg.content)
             }
 
         }
