@@ -167,6 +167,7 @@ const _CMD_DEBUG       = PREFIX + 'debug';
 const _CMD_TEST        = PREFIX + 'hello';
 const _CMD_LANG        = PREFIX + 'lang';
 const _EDDIE           = PREFIX + 'e';
+const _JOINVC          = PREFIX + 'jvc';
 
 const guildMap = new Map();
 
@@ -194,7 +195,17 @@ discordClient.on('message', async (msg) => {
             } else {
                 msg.reply("Cannot leave because not connected.")
             }
-        } else if (msg.content.trim().toLowerCase() == _CMD_HELP) {
+        } else if (msg.content.trim().toLowerCase() == _JOINVC) {
+            let channel = msg.guild.channels.find(channel => channel.name === msg.content);
+            if(channel != null){
+                msg.reply(channel.name);
+            }
+            else{
+                return msg.reply(msg.content)
+            }
+
+        }
+        else if (msg.content.trim().toLowerCase() == _CMD_HELP) {
             msg.reply(getHelpString());
         }
         else if (msg.content.trim().toLowerCase() == _CMD_DEBUG) {
@@ -216,7 +227,7 @@ discordClient.on('message', async (msg) => {
               for (const x of data) {
                 updateWitAIAppLang(x.id, lang, data => {
                   if ('success' in data)
-                    msg.reply('succes!')
+                    msg.reply('success!')
                   else if ('error' in data && data.error !== 'Access token does not match')
                     msg.reply('Error: ' + data.error)
                 })
@@ -249,6 +260,21 @@ class Silence extends Readable {
     this.push(SILENCE_FRAME);
     this.destroy();
   }
+}
+
+async function joinVC(msg, mapKey) {
+    try {
+        const channels = msg.guild.channels.filter(c => c.parentID === '497908108803440653' && c.type === 'voice');
+        return msg.reply(channels);
+        /*
+        for (const channel of channels){
+            if (channel.name == '')
+        }
+
+        let voice_Channel = await discordClient.channels.fetch(msg.channel.id);
+        if (!voice_Channel) return msg.reply("Error: The voice channel does not exist!");
+        */
+    }
 }
 
 async function connect(msg, mapKey) {
