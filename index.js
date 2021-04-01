@@ -197,7 +197,7 @@ discordClient.on('message', async (msg) => {
                 msg.reply("Cannot leave because not connected.")
             }
         } else if (msg.content.trim().toLowerCase().substring(0,3) == _JOINVC.substring(0,3)) {
-            let channel = msg.guild.channels.find(channel => channel.name === msg.content);
+            let channel = msg.member.guild.channels.find(channel => channel.name === msg.content);
             msg.reply(msg.content);
             if(channel != null){
                 msg.reply(channel.name);
