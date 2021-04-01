@@ -174,7 +174,6 @@ const guildMap = new Map();
 
 discordClient.on('message', async (msg) => {
     try {
-
         if (!('guild' in msg) || !msg.guild) return; // prevent private messages to bot
         const mapKey = msg.guild.id;
         if (msg.content.trim().toLowerCase() == _CMD_JOIN) {
@@ -197,10 +196,12 @@ discordClient.on('message', async (msg) => {
                 msg.reply("Cannot leave because not connected.")
             }
         } else if (msg.content.trim().toLowerCase().substring(0,3) == _JOINVC.substring(0,3)) {
-            let channel = msg.guild.channels.cache.find(channel => channel.name === msg.content);
-            msg.reply(msg.content);
+            let channel = msg.guild.channels.cache.find(channel => channel.name === msg.content.substring(3));
             if(channel != null){
                 msg.reply(channel.name);
+            }
+            else{
+                msg.reply('could not find channel')
             }
         }
         else if (msg.content.trim().toLowerCase() == _CMD_HELP) {
