@@ -259,22 +259,24 @@ class Silence extends Readable {
     this.destroy();
   }
 }
-
+/*
 async function joinVC(msg, mapKey) {
     try {
         const channels = msg.guild.channels.filter(c => c.parentID === '497908108803440653' && c.type === 'voice');
         return msg.reply(channels);
-        /*
+
         for (const channel of channels){
             if (channel.name == '')
         }
 
         let voice_Channel = await discordClient.channels.fetch(msg.channel.id);
         if (!voice_Channel) return msg.reply("Error: The voice channel does not exist!");
-        */
+
+    }catch (e) {
+        console.log(e);
     }
 }
-
+*/
 async function connect(msg, mapKey) {
     try {
         let voice_Channel = await discordClient.channels.fetch(msg.member.voice.channelID);
